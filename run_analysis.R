@@ -1,7 +1,7 @@
 library(plyr)
 library(dplyr)
 library(tidyr)
-library(reshape2)
+
 
 trainx <- read.table("~/X_train.txt")
 trainy <- read.table("~/y_train.txt")
@@ -35,7 +35,7 @@ datat <- data%>%select(1:8, 43:48, 83:88, 123:128, 163:168, 203:204, 216:217, 22
         mutate(source=ifelse(variable %in% c("V41","V42","V43","V44","V45","V46",
                                              "V214","V215"),"gravity","body"))%>%
         mutate(tool=ifelse(variable %in% c("V121","V122","V123","V124","V125","V126",
-                                           "V161","V162","V163","V164","V165","V166",
+                                           "V161","V162","V163","V164","V165","V166","V240","V241",
                                            "V253","V254", "V424","V425","V426", "V427",
                                            "V428","V429","V452","V453","V454",
                                            "V529","V530","V539","V542","V543","V552")
@@ -80,6 +80,8 @@ datat <- datat[,c("subjectid","activityid","domain","source","tool","measurement
                   "jerk","magnitude", "axis","value")]
 
 tidydata <- aggregate(datat[,10],datat[,1:9],mean)
+
+tidydata <- rename(tidydata, meanvalue=x)
 
 tidydatawrite <- write.table(tidydata,"~/tidydata.txt")
 
