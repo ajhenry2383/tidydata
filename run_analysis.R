@@ -83,6 +83,6 @@ tidydata <- aggregate(datat[,10],datat[,1:9],mean)
 
 tidydata <- rename(tidydata, meanvalue=x)
 
-tidydatawrite <- write.table(tidydata,"~/tidydata.txt")
+tidydatawrite <- write.table(tidydata,"~/tidydata.txt", row.name=FALSE)
 
 
